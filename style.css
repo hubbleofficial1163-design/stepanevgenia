@@ -1618,10 +1618,35 @@ a,
     }
 
     .alcohol-options {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: flex-start;
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px 10px !important;
+        justify-content: center !important;
+        align-items: start;
+    }
+
+    .alcohol-option {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 20px;
+        align-items: center;
+        text-align: left;
+        line-height: 1.2;
+        min-height: 24px;
+        column-gap: 8px !important;
+        white-space: nowrap;
+        padding: 0;
+    }
+
+    .alcohol-option input[type="checkbox"] {
+        width: 20px !important;
+        height: 20px !important;
+        margin: 0;
+        justify-self: end;
+    }
+
+    .alcohol-option-none {
+        grid-column: 2;
     }
 }
 
@@ -1664,4 +1689,331 @@ a,
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
     color: #5c151b;
+}
+
+@media screen and (min-width: 480px) {
+    .invitation-text {
+        text-align: center;
+    }
+
+    .invitation,
+    .simple-calendar,
+    .date-photo-container,
+    .date-photo,
+    .wishes-content,
+    .dresscode-content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .invitation,
+    .date-photo,
+    .section-title,
+    .wishes-title {
+        text-align: center;
+    }
+
+    .wishes-container,
+    .program-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .program,
+    .wishes-content {
+        max-width: 900px;
+    }
+
+    .program-item {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .program-content {
+        flex-grow: 0;
+        min-width: 320px;
+    }
+
+    .radio-label,
+    .food-options > label {
+        justify-content: center;
+    }
+
+    .food-options {
+        justify-content: center !important;
+    }
+
+    .alcohol-options {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(150px, max-content));
+        justify-content: center !important;
+        gap: 14px 24px !important;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .alcohol-option {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 20px;
+        align-items: center;
+        column-gap: 8px !important;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    .alcohol-option-none {
+        grid-column: 2;
+    }
+}
+
+
+/* Сдвиг алкогольных опций влево на мобильных устройствах */
+@media screen and (max-width: 479px) {
+    /* Контейнер алкогольных опций - оставляем сетку, но убираем центрирование */
+    .alcohol-options {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, auto)) !important;
+        justify-content: flex-start !important;
+        justify-items: start !important;
+        gap: 12px 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Каждая опция */
+    .alcohol-option {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        justify-content: flex-start !important;
+        white-space: nowrap !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+    
+    /* Чекбокс внутри опции */
+    .alcohol-option input[type="checkbox"] {
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Текст опции */
+    .alcohol-option span:not(.radio-custom) {
+        white-space: nowrap !important;
+    }
+    
+    /* Опция "Не буду алкоголь" - на новой строке или справа, как вам удобнее */
+    .alcohol-option-none {
+        grid-column: span 1 !important;
+    }
+    
+    /* Дополнительно сдвигаем весь контент формы левее */
+    .rsvp-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+/* ===== ГАЛЕРЕЯ С ВОЗМОЖНОСТЬЮ СВАЙПА ===== */
+.gallery-section {
+    padding: 80px 20px;
+    background-color: #f0e9df;
+}
+
+.gallery-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gallery-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #5c151b;
+    margin-bottom: 50px;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+}
+
+.gallery-slider-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Скрываем скроллбар Firefox */
+    cursor: grab;
+}
+
+.gallery-slider::-webkit-scrollbar {
+    display: none; /* Скрываем скроллбар Chrome/Safari */
+}
+
+.gallery-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* Чтобы не мешать свайпу */
+}
+
+/* Кнопки навигации */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background-color: rgba(92, 21, 27, 0.7);
+    color: #f0e9df;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+.gallery-nav:hover {
+    background-color: #5c151b;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-prev {
+    left: 15px;
+}
+
+.gallery-next {
+    right: 15px;
+}
+
+/* Индикаторы (точки) */
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.gallery-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #c09c9c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+    background-color: #5c151b;
+    width: 25px;
+    border-radius: 10px;
+}
+
+.gallery-dot:hover {
+    background-color: #5c151b;
+    opacity: 0.7;
+}
+
+/* Адаптив для мобильных */
+@media screen and (max-width: 768px) {
+    .gallery-title {
+        font-size: 2.5rem;
+        margin-bottom: 35px;
+    }
+    
+    .gallery-image {
+        height: 400px;
+    }
+    
+    .gallery-nav {
+        width: 38px;
+        height: 38px;
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .gallery-section {
+        padding: 50px 15px;
+    }
+    
+    .gallery-title {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+    
+    .gallery-image {
+        height: 300px;
+    }
+    
+    .gallery-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+    }
+    
+    .gallery-prev {
+        left: 8px;
+    }
+    
+    .gallery-next {
+        right: 8px;
+    }
+    
+    .gallery-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .gallery-dot.active {
+        width: 20px;
+    }
+}
+
+
+/* Стили для heart.png в футере */
+.footer-heart {
+    width: 60px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    transition: transform 0.3s ease;
+}
+
+.footer-heart:hover {
+    transform: scale(1.1);
+}
+
+/* Адаптив для мобильных */
+@media screen and (max-width: 479px) {
+    .footer-heart {
+        width: 110px;
+        margin-bottom: 15px;
+    }
 }
