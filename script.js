@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализация формы RSVP
     initRSVPForm();
+    
+
+        // ИНИЦИАЛИЗАЦИЯ ОГРАНИЧЕНИЯ АЛКОГОЛЯ (ДОБАВИТЬ ЭТУ СТРОКУ)
+    initAlcoholLimit();
+
+
+        // ИНИЦИАЛИЗАЦИЯ ГАЛЕРЕИ
+    initGallery();
 });
 
 // Таймер отсчета до свадьбы
@@ -356,3 +364,193 @@ function initRSVPForm() {
         }
     });
 }
+
+
+// ========== ОГРАНИЧЕНИЕ ВЫБОРА АЛКОГОЛЯ (МАКСИМУМ 2) ==========
+function initAlcoholLimit() {
+    const alcoholCheckboxes = document.querySelectorAll('input[name="alcohol"]');
+    
+    if (alcoholCheckboxes.length === 0) return;
+    
+    function handleAlcoholChange() {
+        const checkedCount = document.querySelectorAll('input[name="alcohol"]:checked').length;
+        
+        if (checkedCount >= 2) {
+            // Отключаем все неотмеченные чекбоксы
+            alcoholCheckboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    checkbox.disabled = true;
+                }
+            });
+        } else {
+            // Включаем все чекбоксы обратно
+            alcoholCheckboxes.forEach(checkbox => {
+                checkbox.disabled = false;
+            });
+        }
+    }
+    
+    // Добавляем обработчик на каждый чекбокс
+    alcoholCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handleAlcoholChange);
+    });
+    
+    // Запускаем при загрузке (на случай, если уже что-то выбрано)
+    handleAlcoholChange();
+}
+
+// Добавьте вызов этой функции в DOMContentLoaded
+// Найдите строку document.addEventListener('DOMContentLoaded', function() { 
+// и добавьте туда initAlcoholLimit();
+
+
+// ========== ГАЛЕРЕЯ С ВОЗМОЖНОСТЬЮ СВАЙПА ==========
+function initGallery() {
+    const slider = document.getElementById('gallerySlider');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    const dotsContainer = document.getElementById('galleryDots');
+    
+    if (!slider || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    const slides = document.querySelectorAll('.gallery-slide');
+    const slideCount = slides.length;
+    let currentIndex = 0;
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    
+    // Создаем точки-индикаторы
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < slideCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('gallery-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    // Переход к определенному слайду
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slideCount) index = slideCount - 1;
+        currentIndex = index;
+        const slideWidth = slider.clientWidth;
+        slider.scrollTo({
+            left: currentIndex * slideWidth,
+            behavior: 'smooth'
+        });
+        updateDots();
+    }
+    
+    // Обновление активной точки
+    function updateDots() {
+        const dots = document.querySelectorAll('.gallery-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    // Следующий слайд
+    function nextSlide() {
+        if (currentIndex < slideCount - 1) {
+            goToSlide(currentIndex + 1);
+        } else {
+            goToSlide(0); // Зацикливание
+        }
+    }
+    
+    // Предыдущий слайд
+    function prevSlide() {
+        if (currentIndex > 0) {
+            goToSlide(currentIndex - 1);
+        } else {
+            goToSlide(slideCount - 1); // Зацикливание
+        }
+    }
+    
+    // Обновление текущего индекса при скролле
+    function updateIndexOnScroll() {
+        const slideWidth = slider.clientWidth;
+        const scrollPosition = slider.scrollLeft;
+        currentIndex = Math.round(scrollPosition / slideWidth);
+        updateDots();
+    }
+    
+    // Drag to scroll (для мыши)
+    slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        slider.style.cursor = 'grabbing';
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+    });
+    
+    slider.addEventListener('mouseup', () => {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+        updateIndexOnScroll();
+    });
+    
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events для свайпа на мобильных
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        slider.style.cursor = 'grabbing';
+    }, { passive: true });
+    
+    slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeThreshold = 50;
+        if (touchStartX - touchEndX > swipeThreshold) {
+            nextSlide();
+        } else if (touchEndX - touchStartX > swipeThreshold) {
+            prevSlide();
+        }
+        slider.style.cursor = 'grab';
+        updateIndexOnScroll();
+    });
+    
+    // Отслеживание окончания скролла
+    let scrollTimeout;
+    slider.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateIndexOnScroll, 100);
+    });
+    
+    // Кнопки навигации
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    
+    // Обновление при изменении размера окна
+    window.addEventListener('resize', () => {
+        goToSlide(currentIndex);
+    });
+    
+    // Инициализация
+    createDots();
+    slider.style.cursor = 'grab';
+    
+    // Запускаем обновление индекса после загрузки
+    setTimeout(updateIndexOnScroll, 100);
+}
+
+// Добавьте вызов в DOMContentLoaded
+// Найдите строку с initAlcoholLimit(); и добавьте после нее:
+// initGallery();
