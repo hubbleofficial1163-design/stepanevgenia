@@ -86,7 +86,7 @@
         <div class="location-container">
             <!-- Текст приглашения и дата -->
             <div class="invitation-text">
-                <p class="invitation">Приглашаем Вас разделить с нами первый праздник нашей семьи – нашу свадьбу!</p>
+                <p class="invitation">ПДорогие гости, приглашаем Вас разделить с нами первый праздник нашей семьи - нашу свадьбу! </p>
                 <div class="date">21 АВГУСТА 2026</div>
                 
                 <!-- Простой недельный календарь -->
@@ -327,7 +327,7 @@
             </div>
             <div class="program-content">
             <h3 class="program-title">ТОРЖЕСТВЕННАЯ РЕГИСТРАЦИЯ</h3>
-            <div class="program-time">ЗАГС Советского р-на г. Челябинска</div>
+            <div class="program-time">ЗАГС Советского р-на г. Челябинска, ул. Тимирязева, 28</div>
             <div class="program-time">14:30 - 15:00</div>
             </div>
         </div>
@@ -396,7 +396,7 @@
                 <p class="wishes-text">
                     Ваше присутствие на нашей свадьбе — уже самый ценный подарок для нас! <br><br>
                     Если вы всё же хотите сделать нам подарок, мы будем искренне благодарны за ваш вклад в бюджет нашей молодой семьи — он поможет нам осуществить самые сокровенные мечты. <br> <br>
-                    Мы будем искренне признательны за сертификат на цветы вместо традиционного букета: так подарок принесёт радость не на один день, а на целую неделю. <br> <br>
+                    Мы будем Вам признательны, если вместо самого прекрасного букета Вы порадуете невесту сертификатом в цветочный магазин: так невеста сможет наслаждаться цветами не только один день<br> <br>
                     На нашем празднике будет все: смех, слезы счастья, танцы, песни, тосты… Но наша любовь достаточно сладкая, поэтому просим вас обойтись без «Горько»! <br> <br>
                     Дорогие гости, наш вечер будет особенным и, к сожалению, не совсем подходящим для детей. Пожалуйста, позвольте себе отдохнуть и насладиться праздником. Просим вас оставить деток в надежных руках на этот вечер.
                 </p>
@@ -419,7 +419,7 @@
                 <!-- КРУЖОЧКИ С ЦВЕТАМИ -->
                 <div class="color-palette">
                     <div class="color-circle" style="background-color: #543c30;"></div>
-                    <div class="color-circle" style="background-color: #dacdbd;"></div>              
+             
                     <div class="color-circle" style="background-color: #c09c9c;"></div>
                     <div class="color-circle" style="background-color: rgb(125, 129, 105);"></div>              
                     <div class="color-circle" style="background-color: #540c20;"></div>
@@ -470,17 +470,21 @@
         
         <div class="rsvp-content">
             <p class="rsvp-text">
-                Мы будем ждать от вас ответ до 31 июля 2026 года.
+                Мы будем ждать Вашего ответа до 31 июля 2026 года.
+                <div class="program-time">Вашу вторую половинку просим отдельно заполнить анкету!</div>
             </p>
+            
             
             <form class="rsvp-form">
                 <div class="form-group">
+                    
                     <input type="text" class="form-input" placeholder="Фамилия Имя" required>
                 </div>
                 
                 <!-- ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ -->
                 <div class="form-group">
-                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b; margin-bottom: 15px;">Подтверждение присутствия</p>
+                    <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b; margin-bottom: 15px;">Подтверждение присутствия:</p>
+                    
                     <div class="radio-group">
                         <label class="radio-label">
                             <input type="radio" name="attendance" value="yes" required>
@@ -498,27 +502,27 @@
                 
                 <!-- ПРЕДПОЧТЕНИЯ ПО АЛКОГОЛЮ -->
                 <div class="form-group">
-                    <label style="display: block; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b;">Предпочтения по алкоголю</label>
+                    <label style="display: block; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b;">Предпочтения по алкоголю: <div class="program-time">(Не более 2-х вариантов)</div></label>
                     <div class="alcohol-options" style="display: flex; flex-wrap: wrap; gap: 12px;">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="red_wine" style="width: 18px; height: 18px; cursor: pointer;"> Красное вино
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="white_wine" style="width: 18px; height: 18px; cursor: pointer;"> Белое вино
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
-                            <input type="checkbox" name="alcohol" value="champagne" style="width: 18px; height: 18px; cursor: pointer;"> Шампанское (игристое вино)
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                            <input type="checkbox" name="alcohol" value="champagne" style="width: 18px; height: 18px; cursor: pointer;"> Шампанское
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="vodka" style="width: 18px; height: 18px; cursor: pointer;"> Водка
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="whiskey" style="width: 18px; height: 18px; cursor: pointer;"> Виски
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="cognac" style="width: 18px; height: 18px; cursor: pointer;"> Коньяк
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
+                        <label class="alcohol-option alcohol-option-none" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem;">
                             <input type="checkbox" name="alcohol" value="none" style="width: 18px; height: 18px; cursor: pointer;"> Не буду алкоголь
                         </label>
                     </div>
@@ -526,7 +530,7 @@
                 
                 <!-- ПРЕДПОЧТЕНИЯ ПО ЕДЕ -->
                 <div class="form-group">
-                    <label style="display: block; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b;">Предпочтение по еде</label>
+                    <label style="display: block; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #5c151b;">Предпочтение по еде:</label>
                     <div class="food-options" style="display: flex; flex-wrap: wrap; gap: 20px;">
                         <label class="radio-label" style="margin-right: 20px;">
                             <input type="radio" name="food" value="meat" required>
@@ -552,18 +556,54 @@
     </div>
 </section>
 
+
+<!-- Секция ГАЛЕРЕЯ -->
+<section class="gallery-section">
+    <div class="gallery-container">
+        <h2 class="gallery-title">Наши моменты</h2>
+        
+        <div class="gallery-slider-container">
+            <div class="gallery-slider" id="gallerySlider">
+                <div class="gallery-slide">
+                    <img src="1.jpg" alt="Фото 1" class="gallery-image">
+                </div>
+                <div class="gallery-slide">
+                    <img src="2.jpg" alt="Фото 2" class="gallery-image">
+                </div>
+                <div class="gallery-slide">
+                    <img src="3.jpg" alt="Фото 3" class="gallery-image">
+                </div>
+                <div class="gallery-slide">
+                    <img src="4.jpg" alt="Фото 4" class="gallery-image">
+                </div>
+                <div class="gallery-slide">
+                    <img src="5.jpg" alt="Фото 5" class="gallery-image">
+                </div>
+            </div>
+            
+            <!-- Кнопки навигации -->
+            <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
+            <button class="gallery-nav gallery-next" id="galleryNext">›</button>
+        </div>
+        
+        <!-- Индикаторы (точки) -->
+        <div class="gallery-dots" id="galleryDots"></div>
+    </div>
+</section>
+
     <!-- Футер -->
+<!-- Футер -->
 <!-- Футер -->
 <footer class="footer-section">
     <div class="footer-container">
-        <!-- Фото 2.jpg -->
-        <!-- <div class="footer-photo-container">
-            <img src="2.jpg" alt="Андрей и Диана" class="footer-photo">
-        </div> -->
+        <!-- Фото heart.png -->
+        <div class="footer-photo-container">
+            <img src="heart.png" alt="Сердце" class="footer-heart">
+        </div>
         
         <p class="footer-text">
-            Ждём Вас с нетерпением!<br>
-            Ваши жених и невеста
+            Очень ждём вас, <br> с любовью Степан и Евгения
+
         </p>
     </div>
 </footer>
