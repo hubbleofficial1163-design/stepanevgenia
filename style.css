@@ -2058,3 +2058,42 @@ a,
         margin-bottom: 15px;
     }
 }
+
+
+/* ===== КНОПКА TELEGRAM В БЛОКЕ WISHES ===== */
+.wishes-tg-button {
+    display: inline-block;
+    background-color: #f0e9df;
+    color: #5c151b !important;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 16px;
+    margin: 0 4px;
+    border-radius: 30px;
+    border: 1px solid #5c151b;
+    transition: all 0.3s ease;
+    letter-spacing: 0.05rem;
+    cursor: pointer;
+}
+
+.wishes-tg-button:hover {
+    background-color: #5c151b;
+    color: #f0e9df !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.wishes-tg-button:active {
+    transform: translateY(0);
+}
+
+/* Адаптация для мобильных устройств */
+@media screen and (max-width: 479px) {
+    .wishes-tg-button {
+        font-size: 0.85rem;
+        padding: 5px 14px;
+        margin: 5px 2px;
+    }
+}
