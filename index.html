@@ -86,7 +86,7 @@
         <div class="location-container">
             <!-- Текст приглашения и дата -->
             <div class="invitation-text">
-                <p class="invitation">ПДорогие гости, приглашаем Вас разделить с нами первый праздник нашей семьи - нашу свадьбу! </p>
+                <p class="invitation">Дорогие гости, приглашаем Вас разделить с нами первый праздник нашей семьи - нашу свадьбу! </p>
                 <div class="date">21 АВГУСТА 2026</div>
                 
                 <!-- Простой недельный календарь -->
@@ -396,7 +396,7 @@
                 <p class="wishes-text">
                     Ваше присутствие на нашей свадьбе — уже самый ценный подарок для нас! <br><br>
                     Если вы всё же хотите сделать нам подарок, мы будем искренне благодарны за ваш вклад в бюджет нашей молодой семьи — он поможет нам осуществить самые сокровенные мечты. <br> <br>
-                    Мы будем Вам признательны, если вместо самого прекрасного букета Вы порадуете невесту сертификатом в цветочный магазин: так невеста сможет наслаждаться цветами не только один день<br> <br>
+                    Мы будем Вам признательны, если вместо самого прекрасного букета Вы порадуете невесту сертификатом в цветочный магазин: так невеста сможет наслаждаться цветами не только один день. <br> <br>
                     На нашем празднике будет все: смех, слезы счастья, танцы, песни, тосты… Но наша любовь достаточно сладкая, поэтому просим вас обойтись без «Горько»! <br> <br>
                     Дорогие гости, наш вечер будет особенным и, к сожалению, не совсем подходящим для детей. Пожалуйста, позвольте себе отдохнуть и насладиться праздником. Просим вас оставить деток в надежных руках на этот вечер.
                 </p>
@@ -434,33 +434,42 @@
         </div>
     </section>
 
-    <!-- Таймер отсчета до свадьбы -->
-    <section class="countdown-section">
-        <div class="countdown-container">
-            <h2 class="countdown-title">ДО СВАДЬБЫ ОСТАЛОСЬ</h2>
-            <div class="countdown-timer">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">ДНЕЙ</div>
+
+    <!-- Секция ГАЛЕРЕЯ -->
+<section class="gallery-section">
+    <div class="gallery-container">
+        <h2 class="gallery-title">Наши моменты</h2>
+        
+        <div class="gallery-slider-container">
+            <div class="gallery-slider" id="gallerySlider">
+                <div class="gallery-slide">
+                    <img src="1.jpg" alt="Фото 1" class="gallery-image">
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">ЧАСОВ</div>
+                <div class="gallery-slide">
+                    <img src="2.jpg" alt="Фото 2" class="gallery-image">
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">МИНУТ</div>
+                <div class="gallery-slide">
+                    <img src="3.jpg" alt="Фото 3" class="gallery-image">
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">СЕКУНД</div>
+                <div class="gallery-slide">
+                    <img src="4.jpg" alt="Фото 4" class="gallery-image">
+                </div>
+                <div class="gallery-slide">
+                    <img src="5.jpg" alt="Фото 5" class="gallery-image">
                 </div>
             </div>
+            
+            <!-- Кнопки навигации -->
+            <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
+            <button class="gallery-nav gallery-next" id="galleryNext">›</button>
         </div>
-    </section>
+        
+        <!-- Индикаторы (точки) -->
+        <div class="gallery-dots" id="galleryDots"></div>
+    </div>
+</section>
+
+
 
     <!-- Секция "RSVP" (СВЕТЛЫЙ ФОН) -->
     <!-- Секция "RSVP" (СВЕТЛЫЙ ФОН) -->
@@ -557,39 +566,34 @@
 </section>
 
 
-<!-- Секция ГАЛЕРЕЯ -->
-<section class="gallery-section">
-    <div class="gallery-container">
-        <h2 class="gallery-title">Наши моменты</h2>
-        
-        <div class="gallery-slider-container">
-            <div class="gallery-slider" id="gallerySlider">
-                <div class="gallery-slide">
-                    <img src="1.jpg" alt="Фото 1" class="gallery-image">
+
+    <!-- Таймер отсчета до свадьбы -->
+    <section class="countdown-section">
+        <div class="countdown-container">
+            <h2 class="countdown-title">ДО СВАДЬБЫ ОСТАЛОСЬ</h2>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">ДНЕЙ</div>
                 </div>
-                <div class="gallery-slide">
-                    <img src="2.jpg" alt="Фото 2" class="gallery-image">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">ЧАСОВ</div>
                 </div>
-                <div class="gallery-slide">
-                    <img src="3.jpg" alt="Фото 3" class="gallery-image">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">МИНУТ</div>
                 </div>
-                <div class="gallery-slide">
-                    <img src="4.jpg" alt="Фото 4" class="gallery-image">
-                </div>
-                <div class="gallery-slide">
-                    <img src="5.jpg" alt="Фото 5" class="gallery-image">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">СЕКУНД</div>
                 </div>
             </div>
-            
-            <!-- Кнопки навигации -->
-            <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
-            <button class="gallery-nav gallery-next" id="galleryNext">›</button>
         </div>
-        
-        <!-- Индикаторы (точки) -->
-        <div class="gallery-dots" id="galleryDots"></div>
-    </div>
-</section>
+    </section>
 
     <!-- Футер -->
 <!-- Футер -->
