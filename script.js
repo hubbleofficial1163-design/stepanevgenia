@@ -1,4 +1,4 @@
-// Скрипт для свадебного сайта Андрей & Диана
+// Скрипт для свадебного сайта Степан & Евгения
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Свадебный сайт загружен');
     
@@ -12,18 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация формы RSVP
     initRSVPForm();
     
-
-        // ИНИЦИАЛИЗАЦИЯ ОГРАНИЧЕНИЯ АЛКОГОЛЯ (ДОБАВИТЬ ЭТУ СТРОКУ)
+    // Инициализация ограничения алкоголя (максимум 2)
     initAlcoholLimit();
-
-
-        // ИНИЦИАЛИЗАЦИЯ ГАЛЕРЕИ
+    
+    // Инициализация галереи
     initGallery();
 });
 
 // Таймер отсчета до свадьбы
 function updateCountdown() {
-    const weddingDate = new Date('2026-08-08T15:00:00');
+    const weddingDate = new Date('2026-08-21T15:00:00');
     const now = new Date();
     const diff = weddingDate - now;
     
@@ -243,7 +241,7 @@ function showLoadingModal() {
                 width: 50px;
                 height: 50px;
                 border: 3px solid #e0e0e0;
-                border-top-color: #999;
+                border-top-color: #5c151b;
                 border-radius: 50%;
                 margin: 0 auto 20px;
                 animation: spin 1s linear infinite;
@@ -260,7 +258,7 @@ function showLoadingModal() {
 }
 
 // ========== GOOGLE SHEETS ==========
-const SCRIPT_URL = 'https://script.gooPfEUmgIOQLFrZLZZiSTcPwwQHCYO-D98q/exec'; // ЗАМЕНИТЕ НА ВАШ URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzymm8bCWEH3_S8YFy1KPZgGJHj6TYXXCETPzbK39AhrW6Jkravm-AzIvLkTTh5PJfBXQ/exec'; // ЗАМЕНИТЕ НА ВАШ URL
 
 // Инициализация формы RSVP
 function initRSVPForm() {
@@ -275,16 +273,14 @@ function initRSVPForm() {
         
         // Получаем данные
         const nameInput = this.querySelector('input[type="text"]');
-        const guestsSelect = this.querySelector('.form-select');
-        const allergyInput = this.querySelector('#allergy');
         const attendanceRadio = this.querySelector('input[name="attendance"]:checked');
+        const foodRadio = this.querySelector('input[name="food"]:checked');
         
         const name = nameInput ? nameInput.value.trim() : '';
-        const guests = guestsSelect ? guestsSelect.value : '1';
-        const allergy = allergyInput ? allergyInput.value.trim() : '';
         const attendance = attendanceRadio ? attendanceRadio.value : null;
+        const food = foodRadio ? foodRadio.value : '';
         
-        // Собираем выбранные алкогольные предпочтения (несколько чекбоксов)
+        // Собираем выбранные алкогольные предпочтения
         let alcoholValues = [];
         document.querySelectorAll('input[name="alcohol"]:checked').forEach(checkbox => {
             alcoholValues.push(checkbox.value);
@@ -312,9 +308,8 @@ function initRSVPForm() {
             // Формируем данные для отправки
             const formDataToSend = new URLSearchParams();
             formDataToSend.append('name', name);
-            formDataToSend.append('guests', guests);
-            formDataToSend.append('allergy', allergy);
             formDataToSend.append('attendance', attendance);
+            formDataToSend.append('food', food);
             
             for (const alcohol of alcoholValues) {
                 formDataToSend.append('alcohol', alcohol);
@@ -334,7 +329,7 @@ function initRSVPForm() {
                 if (attendance === 'yes') {
                     showModal(
                         'Спасибо, ' + name + '!',
-                        'Мы будем ждать вас на нашей свадьбе 8 августа 2026 года! 🎉',
+                        'Мы будем ждать вас на нашей свадьбе 21 августа 2026 года! 🎉',
                         false
                     );
                 } else {
@@ -365,7 +360,6 @@ function initRSVPForm() {
     });
 }
 
-
 // ========== ОГРАНИЧЕНИЕ ВЫБОРА АЛКОГОЛЯ (МАКСИМУМ 2) ==========
 function initAlcoholLimit() {
     const alcoholCheckboxes = document.querySelectorAll('input[name="alcohol"]');
@@ -376,33 +370,24 @@ function initAlcoholLimit() {
         const checkedCount = document.querySelectorAll('input[name="alcohol"]:checked').length;
         
         if (checkedCount >= 2) {
-            // Отключаем все неотмеченные чекбоксы
             alcoholCheckboxes.forEach(checkbox => {
                 if (!checkbox.checked) {
                     checkbox.disabled = true;
                 }
             });
         } else {
-            // Включаем все чекбоксы обратно
             alcoholCheckboxes.forEach(checkbox => {
                 checkbox.disabled = false;
             });
         }
     }
     
-    // Добавляем обработчик на каждый чекбокс
     alcoholCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', handleAlcoholChange);
     });
     
-    // Запускаем при загрузке (на случай, если уже что-то выбрано)
     handleAlcoholChange();
 }
-
-// Добавьте вызов этой функции в DOMContentLoaded
-// Найдите строку document.addEventListener('DOMContentLoaded', function() { 
-// и добавьте туда initAlcoholLimit();
-
 
 // ========== ГАЛЕРЕЯ С ВОЗМОЖНОСТЬЮ СВАЙПА ==========
 function initGallery() {
@@ -420,7 +405,6 @@ function initGallery() {
     let startX = 0;
     let scrollLeft = 0;
     
-    // Создаем точки-индикаторы
     function createDots() {
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slideCount; i++) {
@@ -432,7 +416,6 @@ function initGallery() {
         }
     }
     
-    // Переход к определенному слайду
     function goToSlide(index) {
         if (index < 0) index = 0;
         if (index >= slideCount) index = slideCount - 1;
@@ -445,7 +428,6 @@ function initGallery() {
         updateDots();
     }
     
-    // Обновление активной точки
     function updateDots() {
         const dots = document.querySelectorAll('.gallery-dot');
         dots.forEach((dot, i) => {
@@ -453,25 +435,22 @@ function initGallery() {
         });
     }
     
-    // Следующий слайд
     function nextSlide() {
         if (currentIndex < slideCount - 1) {
             goToSlide(currentIndex + 1);
         } else {
-            goToSlide(0); // Зацикливание
+            goToSlide(0);
         }
     }
     
-    // Предыдущий слайд
     function prevSlide() {
         if (currentIndex > 0) {
             goToSlide(currentIndex - 1);
         } else {
-            goToSlide(slideCount - 1); // Зацикливание
+            goToSlide(slideCount - 1);
         }
     }
     
-    // Обновление текущего индекса при скролле
     function updateIndexOnScroll() {
         const slideWidth = slider.clientWidth;
         const scrollPosition = slider.scrollLeft;
@@ -479,7 +458,7 @@ function initGallery() {
         updateDots();
     }
     
-    // Drag to scroll (для мыши)
+    // Drag to scroll
     slider.addEventListener('mousedown', (e) => {
         isDragging = true;
         startX = e.pageX - slider.offsetLeft;
@@ -506,7 +485,7 @@ function initGallery() {
         slider.scrollLeft = scrollLeft - walk;
     });
     
-    // Touch events для свайпа на мобильных
+    // Touch events для свайпа
     let touchStartX = 0;
     let touchEndX = 0;
     
@@ -527,30 +506,20 @@ function initGallery() {
         updateIndexOnScroll();
     });
     
-    // Отслеживание окончания скролла
     let scrollTimeout;
     slider.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(updateIndexOnScroll, 100);
     });
     
-    // Кнопки навигации
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
     
-    // Обновление при изменении размера окна
     window.addEventListener('resize', () => {
         goToSlide(currentIndex);
     });
     
-    // Инициализация
     createDots();
     slider.style.cursor = 'grab';
-    
-    // Запускаем обновление индекса после загрузки
     setTimeout(updateIndexOnScroll, 100);
 }
-
-// Добавьте вызов в DOMContentLoaded
-// Найдите строку с initAlcoholLimit(); и добавьте после нее:
-// initGallery();
