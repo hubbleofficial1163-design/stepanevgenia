@@ -667,8 +667,8 @@ body {
 /* Футер - БОРДОВЫЙ ФОН */
 .footer-section {
     padding: 60px 20px;
-    background-color: #5c151b;
-    color: #f0e9df;
+    background-color: #f0e9df;
+    color: #5c151b;
 }
 
 .footer-container {
@@ -682,7 +682,7 @@ body {
     font-weight: 300;
     font-size: 1.3rem;
     line-height: 1.6;
-    color: #f0e9df;
+    color: #5c151b;
     max-width: 800px;
     margin: 0 auto;
 }
