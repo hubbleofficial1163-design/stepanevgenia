@@ -258,20 +258,15 @@ function showLoadingModal() {
 }
 
 // ========== GOOGLE SHEETS ==========
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzymm8bCWEH3_S8YFy1KPZgGJHj6TYXXCETPzbK39AhrW6Jkravm-AzIvLkTTh5PJfBXQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzymm8bCWEH3_S8YFy1KPZgGJHj6TYXXCETPzbK39AhrW6Jkravm-AzIvLkTTh5PJfBXQ/exec'; // ЗАМЕНИТЕ НА ВАШ URL
 
-// Инициализация формы RSVP (упрощённая, без ожидания ответа)
+// Инициализация формы RSVP
 function initRSVPForm() {
     const rsvpForm = document.querySelector('.rsvp-form');
     if (!rsvpForm) return;
     
-    let isSubmitting = false; // Флаг для предотвращения повторной отправки
-    
     rsvpForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        // Предотвращаем повторную отправку
-        if (isSubmitting) return;
         
         const submitBtn = this.querySelector('.submit-button');
         const originalText = submitBtn.textContent;
@@ -303,12 +298,10 @@ function initRSVPForm() {
             return;
         }
         
-        // Блокируем кнопку
-        isSubmitting = true;
+        // Показываем загрузку
         submitBtn.disabled = true;
         submitBtn.textContent = 'Отправка...';
         
-        // Показываем загрузку
         const loadingModal = showLoadingModal();
         
         try {
@@ -322,57 +315,47 @@ function initRSVPForm() {
                 formDataToSend.append('alcohol', alcohol);
             }
             
-            // Отправляем запрос (не ждём ответа)
-            fetch(SCRIPT_URL, {
+            const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Важно для обхода CORS
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formDataToSend.toString()
-            }).catch(err => console.log('Ошибка отправки (не критично):', err));
+            });
             
-            // Ждём 2 секунды, чтобы запрос точно ушёл
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            const result = await response.json();
             
-            // Закрываем окно загрузки
             loadingModal.remove();
             
-            // Показываем успех (даже если fetch упал, данные скорее всего ушли)
-            if (attendance === 'yes') {
-                showModal(
-                    'Спасибо, ' + name + '!',
-                    'Мы будем ждать вас на нашей свадьбе 21 августа 2026 года! 🎉',
-                    false
-                );
+            if (result.result === 'success') {
+                if (attendance === 'yes') {
+                    showModal(
+                        'Спасибо, ' + name + '!',
+                        'Мы будем ждать вас на нашей свадьбе 21 августа 2026 года! 🎉',
+                        false
+                    );
+                } else {
+                    showModal(
+                        'Спасибо за ответ!',
+                        'Очень жаль, что вы не сможете быть с нами в этот день.',
+                        false
+                    );
+                }
+                // Очищаем форму
+                rsvpForm.reset();
+                // Сбрасываем чекбоксы
+                document.querySelectorAll('input[name="alcohol"]').forEach(cb => cb.checked = false);
             } else {
-                showModal(
-                    'Спасибо за ответ!',
-                    'Очень жаль, что вы не сможете быть с нами в этот день.',
-                    false
-                );
+                throw new Error(result.message || 'Ошибка отправки');
             }
-            
-            // Очищаем форму
-            rsvpForm.reset();
-            // Сбрасываем чекбоксы
-            document.querySelectorAll('input[name="alcohol"]').forEach(cb => cb.checked = false);
-            
         } catch (error) {
             loadingModal.remove();
-            // Даже при ошибке показываем успех, так как данные могли уйти
             showModal(
-                'Спасибо, ' + name + '!',
-                'Ваш ответ получен. Мы будем ждать вас на свадьбе! 🎉',
-                false
+                'Ошибка',
+                error.message || 'Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.',
+                true
             );
-            rsvpForm.reset();
-            document.querySelectorAll('input[name="alcohol"]').forEach(cb => cb.checked = false);
         } finally {
-            // Разблокируем кнопку через 1 секунду после закрытия модалки
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                isSubmitting = false;
-            }, 1000);
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
     });
 }
